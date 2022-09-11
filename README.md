@@ -14,4 +14,5 @@ To re-open the menu during the game, pinch the index and thumb fingers of both h
 If you get hit by the fishbones, come back to the start (blue area).
 
 ### Disclaimer
-I decline any responsability if you get injured while using this app.
+Do not let the lenses of your VR headset come into contact with sunlight!!!  
+Be careful of not falling while using this app, I decline any responsability if you get injured while using it.
