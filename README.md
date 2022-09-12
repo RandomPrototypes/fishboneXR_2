@@ -3,6 +3,8 @@
 Unofficial mixed reality fishbone experience for Quest 2 (similar to the obstacle from the japanese TV show SASUKE / ninja warrior).  
 For best immersion, put some boxes to create a height difference between the steps. Be careful to make it stable to avoid falling, I'm not responsible in case of injury.
 
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/nzlPO187lXM/0.jpg)](https://www.youtube.com/watch?v=nzlPO187lXM "SASUKE / Ninja Warrior training in VR")
+
 ### How to execute on the Quest.
 Download the apk file and install it to the quest using [sidequest](https://sidequestvr.com/).
 Be sure to have the camera passthrough activated in the settings of the quest.
