@@ -11,6 +11,7 @@ Be sure to have the camera passthrough activated in the settings of the quest.
 
 ### How to play
 Once the game started, press the button "calibrate" on the menu (yellow desk), align the fishbones with your environment and pinch your index and thumb to validate, or press the button A of your right controller.  
+You can use the left controller thumbstick to adjust the distance between the steps.  
 
 To re-open the menu during the game, pinch the index and thumb fingers of both hands or press the button A of the controller.  
 If you get hit by the fishbones, come back to the start (blue area).
