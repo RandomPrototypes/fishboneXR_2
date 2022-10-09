@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &6898166 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7638002798126242726, guid: f7ed455d53c4c8d42ad89da85fb5f2ce, type: 3}
+  m_PrefabInstance: {fileID: 1930430353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &70205084
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +232,7 @@ MonoBehaviour:
   RotationSpeed: 60
   patternId: 0
   mainCylinderMaterial: {fileID: 2100000, guid: c9d29ccbba6a68741aa06168fde04c51, type: 2}
+  initial_cylinder_dist: 0
 --- !u!1001 &283765462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -665,6 +671,7 @@ MonoBehaviour:
   RotationSpeed: -60
   patternId: 1
   mainCylinderMaterial: {fileID: 2100000, guid: 5b0e6f9d7ff6ef043ab38b40f7e30f51, type: 2}
+  initial_cylinder_dist: 0
 --- !u!1001 &607771577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -993,6 +1000,14 @@ MonoBehaviour:
   menuTable: {fileID: 70205084}
   fishbone1: {fileID: 208880162}
   fishbone2: {fileID: 579195154}
+  list_steps:
+  - {fileID: 1951448190}
+  - {fileID: 1273656341}
+  - {fileID: 1212017337}
+  - {fileID: 812260566}
+  - {fileID: 947157865}
+  - {fileID: 6898166}
+  goalArea: {fileID: 2055538812}
   leftHand: {fileID: 685463752}
   rightHand: {fileID: 500270392}
   centerEye: {fileID: 1910706554}
@@ -1151,6 +1166,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4593680705043960, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
   m_PrefabInstance: {fileID: 1910706553}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &812260566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7638002798126242726, guid: f7ed455d53c4c8d42ad89da85fb5f2ce, type: 3}
+  m_PrefabInstance: {fileID: 607771577}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &827256158
 PrefabInstance:
@@ -1587,6 +1607,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &947157865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7638002798126242726, guid: f7ed455d53c4c8d42ad89da85fb5f2ce, type: 3}
+  m_PrefabInstance: {fileID: 827256158}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &951584676 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2037080, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
@@ -1877,6 +1902,11 @@ PrefabInstance:
 --- !u!4 &1171399061 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1689151870107114188, guid: f7ed455d53c4c8d42ad89da85fb5f2ce, type: 3}
+  m_PrefabInstance: {fileID: 1171399060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1212017337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7638002798126242726, guid: f7ed455d53c4c8d42ad89da85fb5f2ce, type: 3}
   m_PrefabInstance: {fileID: 1171399060}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1227774993
@@ -2225,6 +2255,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1273656341 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7638002798126242726, guid: f7ed455d53c4c8d42ad89da85fb5f2ce, type: 3}
+  m_PrefabInstance: {fileID: 577436421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1287187980
 GameObject:
   m_ObjectHideFlags: 0
@@ -3106,6 +3141,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948084294}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1951448190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7638002798126242726, guid: f7ed455d53c4c8d42ad89da85fb5f2ce, type: 3}
+  m_PrefabInstance: {fileID: 283765462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2022035355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}

@@ -10,20 +10,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject menuTable;
-    private MenuMngr menuMngr;
 
     [SerializeField]
     public fishbone_generator fishbone1;
+    [SerializeField]
     public fishbone_generator fishbone2;
 
-    private bool leftControllerFound = false;
-    private bool rightControllerFound = false;
-    private InputDevice leftControllerDevice;
-    private InputDevice rightControllerDevice;
-    private float speed = 5.0f;
+    [SerializeField]
+    public List<GameObject> list_steps;
 
-    private bool calibrationMode = false;
-    private bool editorMode = false;
+    [SerializeField]
+    public GameObject goalArea;
 
     [SerializeField]
     private OVRHand leftHand;
@@ -34,6 +31,22 @@ public class PlayerController : MonoBehaviour
     private GameObject centerEye;
     [SerializeField]
     private GameObject bodyCollider;
+
+    private MenuMngr menuMngr;
+
+
+    private List<Vector3> list_steps_init_pos = new List<Vector3>();
+
+    private Vector3 goal_init_pos;
+
+    private bool leftControllerFound = false;
+    private bool rightControllerFound = false;
+    private InputDevice leftControllerDevice;
+    private InputDevice rightControllerDevice;
+    private float speed = 5.0f;
+
+    private bool calibrationMode = false;
+    private bool editorMode = false;
 
     private OVRHand[] m_hands;
 
@@ -47,6 +60,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Debug.Log("start");
+        for (int i = 0; i < list_steps.Count; i++)
+            list_steps_init_pos.Add(list_steps[i].transform.localPosition);
+        goal_init_pos = goalArea.transform.localPosition;
+        
         closeMenu();
         m_hands = new OVRHand[]
         {
@@ -108,11 +125,29 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(leftControllerDevice.name + leftControllerDevice.characteristics);
             }
         } else {
-            //Debug.Log("left controller handling:");
             if(leftControllerDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 joystickVal))
             {
-                transform.Translate(new Vector3(0,0.1f * speed * joystickVal.y * Time.deltaTime, 0));
-                //Debug.Log("joystick left: "+joystickVal.x+" "+joystickVal.y);
+                float dist = fishbone1.cylinder_dist + 0.1f * joystickVal.y * Time.deltaTime;
+                fishbone1.updateCylinderDist(dist);
+                fishbone2.updateCylinderDist(dist);
+                for (int i = 0; i < list_steps.Count; i++)
+                    list_steps[i].transform.localPosition = new Vector3(list_steps_init_pos[i].x, list_steps_init_pos[i].y, 1 + (list_steps_init_pos[i].z-1) * dist / fishbone1.initial_cylinder_dist);
+                goalArea.transform.localPosition = new Vector3(goal_init_pos.x, goal_init_pos.y, goal_init_pos.z * dist / fishbone1.initial_cylinder_dist);
+                //transform.Translate(new Vector3(0,0,speed * joystickVal.y * Time.deltaTime));
+            }
+            if(leftControllerDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool buttonVal))
+            {
+                if(buttonVal) {
+                    Debug.Log("button: "+buttonVal);
+                    if(timeSincePressControllerButton > 1) {
+                        if(menuMngr.isGroundVisible())
+                            menuMngr.disableGround();
+                        else menuMngr.enableGround();
+                        timeSincePressControllerButton = 0;
+                    }
+                } else {
+                    timeSincePressControllerButton += Time.deltaTime;
+                }
             }
         }
 

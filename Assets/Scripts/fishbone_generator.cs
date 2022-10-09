@@ -19,10 +19,15 @@ public class fishbone_generator : MonoBehaviour
     [SerializeField]
     public Material mainCylinderMaterial;
 
+    GameObject[] main_cylinder = new GameObject[8];
+
     bool rotating = true;
     float rotationStep = 0;
 
     float initial_offset = 0;
+
+    Vector3 initial_local_pos;
+    public float initial_cylinder_dist;
 
     float main_cylinder_radius = 0.4f;
 
@@ -39,14 +44,17 @@ public class fishbone_generator : MonoBehaviour
                                                 {0,1,0,0,1,0,0,1},
                                                 {1,0,1,0,0,0,1,0},
                                                 {0,1,0,1,0,1,0,1}};
-    public int[,] cylinder_config2 = new int[3,8] {{0,1,0,1,0,0,0,1},
+    public int[,] cylinder_config2 = new int[3,8] {{0,1,0,0,0,1,0,1},
                                                    {1,0,1,0,0,0,1,0},
-                                                   {0,1,0,1,0,0,0,1}};
+                                                   {0,1,0,0,0,1,0,1}};
 
     public GameObject[,] list_cylinders;
     // Awake is called before the first frame update
     void Awake()
     {
+        initial_local_pos = transform.localPosition;
+        initial_cylinder_dist = cylinder_dist;
+
         if(patternId == 0)
             cylinder_config = cylinder_config1;
         else cylinder_config = cylinder_config2;
@@ -58,12 +66,12 @@ public class fishbone_generator : MonoBehaviour
 
         float length = cylinder_config.GetLength(0)*cylinder_dist;
         for(int i = 0; i < 8; i++) {
-            GameObject main_cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-            main_cylinder.transform.SetParent(transform);
-            main_cylinder.transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
-            main_cylinder.transform.localPosition = Quaternion.Euler(new Vector3(0, 0, (i+0.5f)*360/8)) * new Vector3(0.0f, main_cylinder_radius, length/2 - 0.25f);
-            main_cylinder.transform.localScale = new Vector3(0.1f,length/2,0.1f);
-            main_cylinder.GetComponent<Renderer>().material = mainCylinderMaterial;
+            main_cylinder[i] = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            main_cylinder[i].transform.SetParent(transform);
+            main_cylinder[i].transform.localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+            main_cylinder[i].transform.localPosition = Quaternion.Euler(new Vector3(0, 0, (i+0.5f)*360/8)) * new Vector3(0.0f, main_cylinder_radius, length/2 - 0.25f);
+            main_cylinder[i].transform.localScale = new Vector3(0.1f,length/2,0.1f);
+            main_cylinder[i].GetComponent<Renderer>().material = mainCylinderMaterial;
         }
 
         for(int i = 0; i < cylinder_config.GetLength(0); i++){
@@ -82,9 +90,34 @@ public class fishbone_generator : MonoBehaviour
         return cylinder;
     }
 
+    public void updateCylinderDist(float new_cylinder_dist)
+    {
+        cylinder_dist = new_cylinder_dist;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        //if(list_cylinders == null)
+            //return ;
+        
+        transform.localPosition = new Vector3(initial_local_pos.x, initial_local_pos.y, initial_local_pos.z * cylinder_dist / initial_cylinder_dist);
+
+        for(int i = 0; i < cylinder_config.GetLength(0); i++){
+            for(int j = 0; j < cylinder_config.GetLength(1); j++){
+                if(cylinder_config[i,j] == 1) {
+                    list_cylinders[i,j].transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -j*360/8));
+                    list_cylinders[i,j].transform.localPosition = list_cylinders[i,j].transform.localRotation * new Vector3(0,main_cylinder_radius,i*cylinder_dist);
+                }
+            }
+        }
+
+        float length = cylinder_config.GetLength(0)*cylinder_dist;
+        for(int i = 0; i < 8; i++) {
+            main_cylinder[i].transform.localPosition = Quaternion.Euler(new Vector3(0, 0, (i+0.5f)*360/8)) * new Vector3(0.0f, main_cylinder_radius, length/2 - 0.25f);
+            main_cylinder[i].transform.localScale = new Vector3(0.1f,length/2,0.1f);
+        }
+
         if(rotating)
             rotationStep += speedRatio * RotationSpeed * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(Vector3.forward * rotationStep);

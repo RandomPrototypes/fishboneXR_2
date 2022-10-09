@@ -177,6 +177,10 @@ public class MenuMngr : MonoBehaviour
         StartCoroutine(startEditorMode(1));
     }
 
+    public bool isGroundVisible() {
+        return fishbone_container.transform.Find("steps").gameObject.activeSelf;
+    }
+
     public void disableGround() {
         Debug.Log("disable ground");
         fishbone_container.transform.Find("steps").gameObject.SetActive(false);
